@@ -1,0 +1,44 @@
+.info-cliente-container{
+    margin-top: 50px;
+    margin-left: 15px;
+}
+
+.dato-contenedor{
+    margin-right: 60px;
+}
+
+.dato-contenedor label{
+    margin-right: 10px;
+}
+
+.dato-contenedor div{
+    color: #797878;
+    font-weight: 600;
+}
+
+.fechas-pago{
+    margin-top: 50px;
+    margin-left: 15px;
+}
+
+.fechas-pago div{
+    display: inline;
+    margin-right: 30px;
+}
+
+.form-date__input{
+    appearance: none;
+    border:2px solid #4e73df;
+    color: #797878;
+    border-radius: 5px;
+    background:#FFF;
+    padding: 4px;
+    display: inline-block;
+    visibility: visible;
+    width: 140px;
+    height: 30px;
+}
+
+.fechas-pago a{
+    margin-left: 40px;
+}

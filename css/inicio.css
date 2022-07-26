@@ -1,0 +1,62 @@
+.logo_gimnasio{
+    height: 500px;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.nombre_gym{
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.info_titulo{
+    text-align: center;
+    font-size: 18px;
+}
+
+.info_texto{
+    text-align: center;
+    font-weight: 700;
+}
+
+
+.n_clientes{
+    margin: 0 auto;
+    padding: 9px 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 160px;
+    border-left: 0.25rem solid #1cc88a;
+    border-radius: 5px;
+    background-color: rgb(255, 246, 246);
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.n_clientes div{
+    display: block;
+}
+
+.n_clientes-titulo{
+    font-size: 12px;
+    color: #1cc88a;
+    font-weight: 700;
+}
+
+.n_clientes-texto{
+    color: #444;
+}
+
+.ganancias{
+    border-left: 0.25rem solid #ff7e27!important;
+}
+
+.ganancias-titulo{
+    color: #ff7e27;
+}
+
+.tarjetas-contenedor{
+    display: flex;
+    margin: 50px 0;
+}
