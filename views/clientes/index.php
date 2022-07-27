@@ -9,6 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
    <link rel="stylesheet" href="<?php echo constant('URL'); ?>css/registro.css">
+   <link rel="stylesheet" href="<?php echo constant('URL'); ?>css/paginacion.css">
 
     <title>GYM</title>
 
@@ -120,14 +121,27 @@
                                                         </a>      
                                                     </td>
                                                 </tr>
-
-                                                
-
-                                        <?php } ?>
-                                        
-                                        
+                                        <?php } ?> 
                                     </tbody>
                                 </table>
+                                <div  class="row col-sm-12 col-md-7">
+                                   <div id="paginas">
+                                        <ul>
+                                            <?php 
+                                                for($i=0; $i < $this->totalPaginas; $i++){
+                                                    if(($i + 1) == $this->actual){
+                                                        $actual = ' class="actual" ';
+                                                    }else{
+                                                        $actual = '';
+                                                    }
+                                                    echo '<li><a ' . $actual . 'href="?pagina='. ($i + 1) .'">' . ($i + 1) . '</a></li>';
+                                                    
+                                                }
+                                            ?>
+                                        </ul>
+                                   </div>             
+                                </div>
+                                
                             </div>
                         </div>
                     </div>

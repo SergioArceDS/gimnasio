@@ -7,6 +7,13 @@ include_once 'models/cliente.php';
             parent::__construct();
         }
 
+        public function calcularPaginas(){
+            $query = $this->db->connect()->query("SELECT COUNT(*) AS total FROM clientes");
+            $resultado = $query->fetch(PDO::FETCH_OBJ)->total;
+
+            return $resultado;
+        }
+
         public function insertarCliente($datos){
             $pdo = $this->db->connect();
             $query = $pdo->prepare('INSERT INTO clientes (nombre_cliente, apellidos, peso, altura, celular, edad) VALUES (:nombre_cliente, :apellidos, :peso, :altura, :celular, :edad)');
@@ -18,11 +25,12 @@ include_once 'models/cliente.php';
         
         }
 
-        public function getClientes(){
+        public function getClientes($pos, $n){
 
             $clientes = [];
             try{
-                $query = $this->db->connect()->query("CALL gimnasio.LISTAR_CLIENTES()");
+                $query = $this->db->connect()->prepare("CALL gimnasio.LISTAR_CLIENTES(:pos, :n)");
+                $query->execute(['pos' => $pos, 'n' => $n]);
                 while($row = $query->fetch()){
                     $cliente = new Cliente();
                     $cliente->id_cliente = $row['id_cliente'];

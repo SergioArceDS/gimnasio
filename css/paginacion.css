@@ -1,0 +1,26 @@
+
+#paginas ul{
+    padding: 0;
+}
+#paginas li{
+    display: inline-block;
+    margin: 0;
+    padding: 5px;
+}
+
+#paginas li a{
+    background: #fff;
+    border-radius: 3px;
+    border: 1px solid #dddfeb;
+    color: #4e73df;
+    padding: 8px 15px;
+    text-decoration: none;
+}
+
+
+.actual{
+    color: #fff !important;
+    background-color: #4e73df !important;
+    border-color: #4e73df !important;
+}
+
