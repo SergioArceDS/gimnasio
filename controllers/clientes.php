@@ -42,9 +42,14 @@ if(empty($_SESSION['nombre'])){
             $membresias = $modeloMembresias->getMembresias();
             $this->view->membresias = $membresias;
             $this->calcularPaginas();
-            $clientes = $this->modelo->getClientes($this->indice, $this->resultadosPorPagina);
-            $this->view->clientes = $clientes;
 
+            if(isset($_POST['busqueda'])){
+                $clientes = $this->modelo->buscarPorNombre($_POST['busqueda']);
+                $this->view->clientes = $clientes;
+            }else{
+                $clientes =  $this->modelo->getClientes($this->indice, $this->resultadosPorPagina);
+                $this->view->clientes = $clientes;
+            }
             
             $this->view->totalPaginas = $this->totalPaginas;
             $this->view->actual = $this->paginaActual;

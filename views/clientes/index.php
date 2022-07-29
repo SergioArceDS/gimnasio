@@ -52,12 +52,28 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            
-                            <a data-toggle="modal" data-target="#ventanaModal" href="#" class="btn btn-primary btn-icon-split" style="margin-right: 30px;">
-                                <span class="text">Nuevo</span>
-                            </a>
-                            
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6">
+                                    <a data-toggle="modal" data-target="#ventanaModal" href="#" class="btn btn-primary btn-icon-split" style="margin-left: 30px;">
+                                        <span class="text">Nuevo</span>
+                                    </a>
+                                </div>
+                                
 
+                                <div class="ml-auto mr-3">
+                                    <form action="<?php echo constant('URL'); ?>clientes/render" method="POST" class="d-flex align-items-center">
+                                        <div class="input-group-append">
+                                            <label class="mr-2">Buscar:</label>
+                                        </div>
+                                        <input type="search"  aria-label="Search" aria-describedby="basic-addon2" class="form-control form-control-sm" placeholder="" name="busqueda" required>
+                                        <div class="input-group-append ml-2">
+                                            <button class="btn btn-primary" type="submit">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </form>     
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -134,7 +150,7 @@
                                                     }else{
                                                         $actual = '';
                                                     }
-                                                    echo '<li><a ' . $actual . 'href="?pagina='. ($i + 1) .'">' . ($i + 1) . '</a></li>';
+                                                    echo '<li><a ' . $actual . 'href="' . constant('URL').'clientes?pagina='. ($i + 1) .'">' . ($i + 1) . '</a></li>';
                                                     
                                                 }
                                             ?>

@@ -54,6 +54,35 @@ include_once 'models/cliente.php';
             }
         }
 
+        function buscarPorNombre($nombre){
+            $clientes = [];
+            $query = $this->db->connect()->prepare("CALL BUSCAR_CLIENTE_NOMBRE(:nombre)");
+            try{
+                $query->execute(['nombre' => $nombre]);
+                while($row = $query->fetch()){
+                    $cliente = new Cliente();
+                    $cliente->id_cliente = $row['id_cliente'];
+                    $cliente->nombre_cliente = $row['nombre_cliente'];
+                    $cliente->apellidos = $row['apellidos'];
+                    $cliente->peso = $row['peso'];
+                    $cliente->altura = $row['altura'];
+                    $cliente->celular = $row['celular'];
+                    $cliente->edad = $row['edad'];
+                    $cliente->id_membresia = $row['id_membresia'];
+                    $cliente->nombre_membresia = $row['nombre'];
+                    $cliente->fecha_inscripcion = $row['fecha_inscripcion'];
+                    $cliente->fecha_vencimiento = $row['fecha_vencimiento'];
+
+                    array_push($clientes, $cliente);
+                }
+
+                return $clientes;
+
+            }catch(PDOStatement $e){
+                return [];
+            }
+        }
+
         function getDatosCliente($id){
             $query = $this->db->connect()->prepare('SELECT * FROM clientes WHERE id_cliente = :id_cliente');
             try{
