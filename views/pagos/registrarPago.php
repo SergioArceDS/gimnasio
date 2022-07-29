@@ -9,6 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="stylesheet" href="<?php echo constant('URL'); ?>css/pagos.css">
+    <link rel="stylesheet" href="<?php echo constant('URL'); ?>css/paginacion.css">
 
     <title>GYM</title>
 
@@ -61,8 +62,8 @@
                                     <div class="input-group-append">
                                         <label for="btn-buscar" style="margin-right: 10px;">ID Cliente:</label>
                                     </div>
-                                    <input type="text" class="form-control bg-white border-1 small" placeholder="Buscar por..."
-                                        aria-label="Search" aria-describedby="basic-addon2" name="btn-buscar">
+                                    <input type="number" class="form-control bg-white border-1 small" placeholder="Buscar por..."
+                                        aria-label="Search" aria-describedby="basic-addon2" name="btn-buscar" required>
                                     <div class="input-group-append">
                                         <button class="btn btn-primary" type="button">
                                             <i class="fas fa-search fa-sm"></i>
@@ -191,6 +192,24 @@
                                        <?php } ?>     
                                     </tbody>
                                 </table>
+
+                                <div  class="row col-sm-12 col-md-7">
+                                   <div id="paginas">
+                                        <ul>
+                                            <?php 
+                                                for($i=0; $i < $this->totalPaginas; $i++){
+                                                    if(($i + 1) == $this->actual){
+                                                        $actual = ' class="actual" ';
+                                                    }else{
+                                                        $actual = '';
+                                                    }
+                                                    echo '<li><a ' . $actual . 'href="' . constant('URL').'pagos?pagina='. ($i + 1) .'">' . ($i + 1) . '</a></li>';
+                                                    
+                                                }
+                                            ?>
+                                        </ul>
+                                   </div>             
+                                </div>
                             </div>
                         </div>
                     </div>

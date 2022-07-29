@@ -7,12 +7,20 @@
             parent::__construct();
         }
 
-        function getPagos(){
+        function calcularPaginas(){
+            $query = $this->db->connect()->query("SELECT COUNT(*) AS total FROM cliente_membresia");
+            $resultado = $query->fetch(PDO::FETCH_OBJ)->total;
+
+            return $resultado;
+        }
+
+        function getPagos($pos, $n){
 
             $pagos = [];
 
             try{
-                $query = $this->db->connect()->query("SELECT cliente_membresia.*, membresias.precio FROM gimnasio.cliente_membresia, membresias WHERE cliente_membresia.id_membresia = membresias.id_membresia");
+                $query = $this->db->connect()->prepare("SELECT cliente_membresia.*, membresias.precio FROM gimnasio.cliente_membresia, membresias WHERE cliente_membresia.id_membresia = membresias.id_membresia LIMIT :pos, :n");
+                $query->execute(['pos' => $pos, 'n' => $n]);
                 while($row = $query->fetch()){
                     $pago = new Pagos();
                     $pago->id_pago = $row['idcliente_membresia'];

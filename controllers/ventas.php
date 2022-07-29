@@ -8,16 +8,40 @@ if(empty($_SESSION['nombre'])){
 
     class Ventas extends Controller{
 
+        private $paginaActual;
+        private $totalPaginas;
+        private $nResultados;
+        private $resultadosPorPagina; 
+        private $indice;
+
         function __construct()
         {
             parent::__construct();
             $this->view->mensaje = "";
+            $this->view->totalPaginas = 0;
+            $this->view->actual = 0;
+            $this->resultadosPorPagina = 10;
+            $this->indice = 0;
+            $this->paginaActual = 1;
             
         }
 
+        function calcularPaginas(){
+            $this->nResultados = $this->modelo->calcularPaginas();
+            $this->totalPaginas = round($this->nResultados / $this->resultadosPorPagina, PHP_ROUND_HALF_UP);
+            if(isset($_GET['pagina'])){
+                $this->paginaActual = $_GET['pagina'];
+                $this->indice = ($this->paginaActual - 1) * ($this->resultadosPorPagina);
+                  
+            }
+        }
+
         function render(){
-            $ventas = $this->modelo->getVentas();
+            $this->calcularPaginas();
+            $ventas = $this->modelo->getVentas($this->indice, $this->resultadosPorPagina);
             $this->view->ventas = $ventas;
+            $this->view->totalPaginas = $this->totalPaginas;
+            $this->view->actual = $this->paginaActual;
             $this->view->render('ventas/index');
         }
         

@@ -8,6 +8,13 @@ include_once 'models/venta.php';
             
         }
 
+        function calcularPaginas(){
+            $query = $this->db->connect()->query("SELECT COUNT(*) AS total FROM venta_producto");
+            $resultado = $query->fetch(PDO::FETCH_OBJ)->total;
+
+            return $resultado;
+        }
+
         function verificarProducto($id_producto){
             $query = $this->db->connect()->prepare("SELECT * FROM productos WHERE id_producto = :id_producto");
             try{
@@ -34,12 +41,13 @@ include_once 'models/venta.php';
             }
         }
 
-        function getVentas(){
+        function getVentas($pos, $n){
 
             $ventas = [];
             try{
 
-                $query = $this->db->connect()->query("SELECT venta_producto.*, productos.nombre, (productos.costo * venta_producto.cantidad) as total FROM venta_producto, productos WHERE venta_producto.id_producto = productos.id_producto;");
+                $query = $this->db->connect()->prepare("SELECT venta_producto.*, productos.nombre, (productos.costo * venta_producto.cantidad) as total FROM venta_producto, productos WHERE venta_producto.id_producto = productos.id_producto LIMIT :pos, :n;");
+                $query->execute(['pos' => $pos, 'n' => $n]);
                 while($row = $query->fetch()){
                     $venta = new Venta();
                     $venta->id_venta = $row['idventa_producto'];

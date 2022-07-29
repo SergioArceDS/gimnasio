@@ -9,19 +9,41 @@ if(empty($_SESSION['nombre'])){
 
     class Pagos extends Controller{
 
+        private $paginaActual;
+        private $totalPaginas;
+        private $nResultados;
+        private $resultadosPorPagina; 
+        private $indice;
+
         function __construct()
         {
             parent::__construct();
             $this->view->mensaje = "";
+            $this->resultadosPorPagina = 10;
+            $this->indice = 0;
+            $this->paginaActual = 1;
             
+        }
+
+        function calcularPaginas(){
+            $this->nResultados = $this->modelo->calcularPaginas();
+            $this->totalPaginas = round($this->nResultados / $this->resultadosPorPagina, PHP_ROUND_HALF_UP);
+            if(isset($_GET['pagina'])){
+                $this->paginaActual = $_GET['pagina'];
+                $this->indice = ($this->paginaActual - 1) * ($this->resultadosPorPagina);
+                  
+            }
         }
 
         function render(){
             $modeloMembresias = new membresiasModel();
             $membresias = $modeloMembresias->getMembresias();
             $this->view->membresias = $membresias;
+            $this->calcularPaginas();
             
-            $pagos = $this->modelo->getPagos();
+            $this->view->totalPaginas = $this->totalPaginas;
+            $this->view->actual = $this->paginaActual;
+            $pagos = $this->modelo->getPagos($this->indice, $this->resultadosPorPagina);
             $this->view->pagos = $pagos;
             $this->view->render('pagos/index');
             
@@ -37,8 +59,12 @@ if(empty($_SESSION['nombre'])){
                 $modeloMembresias = new membresiasModel();
                 $membresias = $modeloMembresias->getMembresias();
                 $this->view->membresias = $membresias;
+                $this->calcularPaginas();
+            
+                $this->view->totalPaginas = $this->totalPaginas;
+                $this->view->actual = $this->paginaActual;
 
-                $pagos = $this->modelo->getPagos();
+                $pagos = $this->modelo->getPagos($this->indice, $this->resultadosPorPagina);
                 $this->view->pagos = $pagos;
 
                 $datosCliente = $this->modelo->getDatosCliente($idCliente);
