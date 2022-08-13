@@ -42,3 +42,25 @@
 .fechas-pago a{
     margin-left: 40px;
 }
+
+
+@media (max-width: 1400px) {
+
+    .fechas-pago a{
+        margin-left: 0px;
+        margin-top: 30px;
+    }
+
+    .info-cliente-container{
+        font-size: 14px;
+    }
+
+    .fechas-pago{
+        font-size: 14px;
+    }
+
+    .card-body{
+        font-size: 14px;
+    }
+  }
+  

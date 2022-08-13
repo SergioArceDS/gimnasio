@@ -10,6 +10,7 @@
     <meta name="author" content="">
    <link rel="stylesheet" href="<?php echo constant('URL'); ?>css/registro.css">
    <link rel="stylesheet" href="<?php echo constant('URL'); ?>css/paginacion.css">
+   <link rel="stylesheet" href="<?php echo constant('URL'); ?>css/clientes.css">
 
     <title>GYM</title>
 
